@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:latest # Use the latest MongoDB image
+    container_name: mongodb
+    restart: always
+    # not required for local development it will replace with K8s secret with CI/CD
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: admin # Root username
+    #   MONGO_INITDB_ROOT_PASSWORD: password123 # Root password
+    ports:
+      - "27017:27017" # Expose MongoDB on the default port
+    volumes:
+      - mongo-data:/data/db # Volume for persisting MongoDB data
+
+volumes:
+  mongo-data:
+    driver: local # Use a local volume for persistence
